@@ -15,9 +15,6 @@
     </header>
 
     <div id="my_app">
-        <!-- <div v-for="(item, index) in shopItems" :key = "index">
-            {{item}}
-        </div> -->
         <div class="bg-transp">
             <h2 class="text-center m-2 h-white">To buy:</h2>
             <div class="input-group bg-transp width-s-70 mt-4">
@@ -36,10 +33,9 @@
                         Add to list
                     </div>
                 </button>
-                <!-- <button @click="addToList(item), addToCart(item)">Add to cart</button> -->
             </div>
         </div>
-        <h2 class="text-center m-2 mt-4" v-if="shopItems[0]!=NULL">{{message}}</h3>
+        <h2 class="text-center m-2 mt-4" v-if="shopItems[0]">{{message}}</h3>
         <div сlass="btn-group" role="group">
             <button class="btn btn-light b-all" 
                 v-for="(item, index) in shopItems" 
@@ -50,7 +46,9 @@
         </div>
         <h2 class="text-center m-2 mt-5 h-white">Shopping list:</h2>
         <ul class="sh-list">
-            <li v-for="(item, index) in itemsInCart" :key = "index" v-bind:class="{bought: item.isActive}">
+            <li v-for="(item, index) in itemsInCart"
+                :key = "index"
+                v-bind:class="{bought: item.isActive}">
                 <span v-on:click="item.isActive=!item.isActive">
                         {{index+1}}. {{item.value}}
   
@@ -60,6 +58,7 @@
                     <button class="butn minus round"  @click="reduceCount(item)">-</button>
                     {{item.count}}
                     <button class="butn plus round"  @click="item.count++">+</button>
+                    <button class="close" @click="removeItem(item)">x</button>
                 </span>
                 
             </li>
@@ -82,9 +81,11 @@
                 let item = {
                     value: itemValue,
                     isActive: false,
+                    highlited: false,
                     count: 0,
                 }
                 console.log(itemValue)
+                if (itemValue == "") return
                 this.itemsInCart.forEach(element => {
                         console.log(element.value)
                         console.log(element.isActive)
@@ -104,8 +105,10 @@
                 let item = {
                     value: this.itemValue,
                     isActive: false,
+                    highlited: false,
                     count: 1,
                 }
+                if (itemValue == "") return
                 if (this.shopItems.length <= 5 && (this.shopItems.findIndex(i => i.value == itemValue)) <0){
                     this.shopItems.push(item)
                     }
@@ -119,7 +122,10 @@
                     item.count--
                 else
                     this.itemsInCart.splice(this.itemsInCart.findIndex(i => i.value == item.value),1)
-            }    
+            },
+            removeItem(item){
+                this.itemsInCart.splice(this.itemsInCart.findIndex(i => i.value == item.value),1)
+            }
         },
     })
     </script>
