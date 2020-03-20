@@ -45,16 +45,30 @@
             </button>
         </div>
         <h2 class="text-center m-2 mt-5 h-white">Shopping list:</h2>
+        <h2 class="text-center m-2 mt-5 sum">Total sum: {{totalSum}}</h2>
         <ul class="sh-list">
             <li v-for="(item, index) in itemsInCart"
                 :key = "index"
-                v-bind:class="{bought: item.isActive}">
-                <span v-on:click="item.isActive=!item.isActive">
+                v-bind:class="{bought: item.isActive, cursor: item.curActive}">
+                <span @click="item.isActive=!item.isActive"
+                    @mouseover="item.curActive=!item.curActive"
+                    @mouseout="item.curActive=!item.curActive">
                         {{index+1}}. {{item.value}}
   
                 </span>
                 
                 <span class="right">
+                    <span class="price"
+                    @mouseover="item.curActive=!item.curActive"
+                    @mouseout="item.curActive=!item.curActive"
+                    @click="item.edit=item.value">Price: 
+                        <span v-if="item.edit === item.value"
+                        @mouseover="item.curActive=!item.curActive"
+                        @mouseout="item.curActive=!item.curActive">
+                            <input class="inputPrice" v-model="item.price" @keydown.enter="item.edit=''"/>
+                        </span>
+                        <span v-else>{{item.price}}</span>
+                    rub</span>
                     <button class="butn minus round"  @click="reduceCount(item)">-</button>
                     {{item.count}}
                     <button class="butn plus round"  @click="item.count++">+</button>
@@ -70,42 +84,45 @@
             return {
                 itemValue: "",
                 message: "Recently added", 
-                // count: [],
                 shopItems: [],
                 itemsInCart: [],
             }
         },
-
+        computed: {
+            totalSum(){
+                let sum = 0
+                // if (!this.itemsInCart[0]) return sum
+                this.itemsInCart.forEach(item => sum += parseInt(item.price) * parseInt(item.count))
+                return sum
+                },
+        },
         methods: {
             addToCart(itemValue){
                 let item = {
                     value: itemValue,
+                    edit: "",
                     isActive: false,
-                    highlited: false,
+                    curActive: false,
+                    price: 0,
                     count: 0,
                 }
                 console.log(itemValue)
                 if (itemValue == "") return
-                this.itemsInCart.forEach(element => {
-                        console.log(element.value)
-                        console.log(element.isActive)
-                        console.log(element.count)
-                    });
                 if ((this.itemsInCart.findIndex(i => i.value == itemValue)) <0) {
-                    console.log(this.itemsInCart.findIndex(i => i.value == itemValue))
                     item.count = 1
                     this.itemsInCart.push(item)
                     }
                 else {
-                    console.log(this.itemsInCart.findIndex(i => i.value == itemValue))
                     this.itemsInCart[this.itemsInCart.findIndex(i => i.value == itemValue)].count++
                 }
+                my_app.itemValue = ""
             },
             addToList(itemValue){
                 let item = {
                     value: this.itemValue,
                     isActive: false,
-                    highlited: false,
+                    curActive: false,
+                    price: 0,
                     count: 1,
                 }
                 if (itemValue == "") return
