@@ -51,20 +51,21 @@
                 :key = "index"
                 v-bind:class="{bought: item.isActive, cursor: item.curActive}">
                 <span @click="item.isActive=!item.isActive"
-                    @mouseover="item.curActive=!item.curActive"
-                    @mouseout="item.curActive=!item.curActive">
+                    @mouseover="item.curActive=1"
+                    @mouseout="item.curActive=0">
                         {{index+1}}. {{item.value}}
   
                 </span>
-                
+                <button class="close" @click="removeItem(item)">x</button>
+                <span></span>
                 <span class="right">
                     <span class="price"
                     @mouseover="item.curActive=!item.curActive"
                     @mouseout="item.curActive=!item.curActive"
                     @click="item.edit=item.value">Price: 
                         <span v-if="item.edit === item.value"
-                        @mouseover="item.curActive=!item.curActive"
-                        @mouseout="item.curActive=!item.curActive">
+                        @mouseover="item.curActive=1"
+                        @mouseout="item.curActive=0">
                             <input class="inputPrice" v-model="item.price" @keydown.enter="item.edit=''"/>
                         </span>
                         <span v-else>{{item.price}}</span>
@@ -72,9 +73,9 @@
                     <button class="butn minus round"  @click="reduceCount(item)">-</button>
                     {{item.count}}
                     <button class="butn plus round"  @click="item.count++">+</button>
-                    <button class="close" @click="removeItem(item)">x</button>
+                    
                 </span>
-                
+              
             </li>
     </div>
     <script>

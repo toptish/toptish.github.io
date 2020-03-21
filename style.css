@@ -5,6 +5,7 @@
     padding: 0;
     border: none;
     background-color: rgba(255,255, 255, 0);
+    overflow: hidden;
 }
 
 .header {
@@ -46,7 +47,6 @@
     background-position: bottom;
     background-size: cover;
     width: 100%;
-    max-width: 800px;
 }
 
 .clear {
@@ -84,18 +84,10 @@
 }
 
 .gr {
-    /* relevant styles */
     border: solid .2em;
     border-image:  linear-gradient(to top, rgba(5, 5, 5,70%), rgba(255, 255, 255, 0) 80%) 1;
     padding: .125em;
     background: linear-gradient(to top, white, rgba(255, 255, 255, 0) 90%) content-box;
-    
-    /* other styles
-    margin: 0 auto;
-    width: 5em; height: 3em;
-    color: white;
-    font: 700 2em/2 comic sans ms, verdana, sans serif;
-    text-align: center; */
 }
 
 .butn {
@@ -106,13 +98,11 @@
 }
 
 .minus {
-    /* background-color: #f1f1f1; */
     background-color: rgba(255,255, 255, 0.3);
     color: grey;
 }
 
 .plus {
-    /* background-color: #f1f1f1; */
     background-color: rgba(255,255, 255, 0.3);
     color: grey;
 }
@@ -149,16 +139,29 @@
     letter-spacing: 2px;
     transition: 0.3s all linear;
     }
-.sh-list li:nth-child(2){border-color: #8bc63e;}
-.sh-list li:nth-child(3){border-color: #fcba30;}
-.sh-list li:nth-child(4){border-color: #1ccfc9;}
-.sh-list li:nth-child(5){border-color: #493224;}
+.sh-list li:nth-child(5n+1){border-color: #f05d22;}
+.sh-list li:nth-child(5n+2){border-color: #8bc63e;}
+.sh-list li:nth-child(5n+3){border-color: #fcba30;}
+.sh-list li:nth-child(5n+4){border-color: #1ccfc9;}
+.sh-list li:nth-child(5n+5){border-color: #493224;}
 .sh-list li:hover {border-left: 10px solid transparent;}
-.sh-list li:nth-child(1):hover {border-right: 30px solid #f05d22;}
-.sh-list li:nth-child(2):hover {border-right: 30px solid #8bc63e;}
-.sh-list li:nth-child(3):hover {border-right: 30px solid #fcba30;}
-.sh-list li:nth-child(4):hover {border-right: 30px solid #1ccfc9;}
-.sh-list li:nth-child(5):hover {border-right: 30px solid #493224;}
+.sh-list li:nth-child(5n+1):hover {border-right: 30px solid #f05d22;}
+.sh-list li:nth-child(5n+2):hover {border-right: 30px solid #8bc63e;}
+.sh-list li:nth-child(5n+3):hover {border-right: 30px solid #fcba30;}
+.sh-list li:nth-child(5n+4):hover {border-right: 30px solid #1ccfc9;}
+.sh-list li:nth-child(5n+5):hover {border-right: 30px solid #493224;}
+
+/* .sh-l1{border-color: #f05d22;}
+.sh-l2{border-color: #8bc63e;}
+.sh-l3{border-color: #fcba30;}
+.sh-l4{border-color: #1ccfc9;}
+.sh-l5{border-color: #493224;}
+.sh-list li:hover {border-left: 10px solid transparent;}
+.sh-l1:hover {border-right: 30px solid #f05d22;}
+.sh-l2:hover {border-right: 30px solid #8bc63e;}
+.sh-l3:hover {border-right: 30px solid #fcba30;}
+.sh-l4:hover {border-right: 30px solid #1ccfc9;}
+.sh-l5:hover {border-right: 30px solid #493224;} */
 
 .sh-list li span:nth-child(odd) {
     padding-right: 6px; 
@@ -189,37 +192,53 @@
     visibility: hidden;
 }
 
-.sh-list li:nth-child(1):hover .close {visibility: visible;
+.sh-list li:hover .close {
     position: relative;
     right: -40px;
     border-color: rgba(255, 255, 255, 0);
-    background-color: rgba(255, 255, 255, 0);}
-.sh-list li:nth-child(2):hover  .close {visibility: visible;
+    background-color: rgba(255, 255, 255, 0);
+    overflow: hidden;
+    visibility: visible;
+    /* transition: 5s all linear; */
+}
+/* .sh-list li:nth-child(1n):hover .close {visibility: visible;
     position: relative;
     right: -40px;
     border-color: rgba(255, 255, 255, 0);
-    background-color: rgba(255, 255, 255, 0);}
-.sh-list li:nth-child(3):hover .close {visibility: visible;
+    background-color: rgba(255, 255, 255, 0);
+    transition: 0.3s all linear;
+}
+.sh-list li:nth-child(2n):hover  .close {visibility: visible;
     position: relative;
     right: -40px;
     border-color: rgba(255, 255, 255, 0);
-    background-color: rgba(255, 255, 255, 0);}
-.sh-list li:nth-child(4):hover .close {visibility: visible;
+    background-color: rgba(255, 255, 255, 0);
+    transition: 0.3s all linear;}
+.sh-list li:nth-child(3n):hover .close {visibility: visible;
     position: relative;
     right: -40px;
     border-color: rgba(255, 255, 255, 0);
-    background-color: rgba(255, 255, 255, 0);}
-.sh-list li:nth-child(5):hover .close {visibility: visible;
+    background-color: rgba(255, 255, 255, 0);
+    transition: 0.3s all linear;}
+.sh-list li:nth-child(4n):hover .close {visibility: visible;
     position: relative;
     right: -40px;
     border-color: rgba(255, 255, 255, 0);
-    background-color: rgba(255, 255, 255, 0);}
+    background-color: rgba(255, 255, 255, 0);
+    transition: 0.3s all linear;}
+.sh-list li:nth-child(5n):hover .close {visibility: visible;
+    position: relative;
+    right: -40px;
+    border-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0);
+    transition: 0.3s all linear;}
 
-.sh-list li:nth-child(5):hover .close {visibility: visible;
+.sh-list li:nth-child(5n):hover .close {visibility: visible;
     position: relative;
     right: -40px;
     border-color: rgba(255, 255, 255, 0);
-    background-color: rgba(255, 255, 255, 0);}
+    background-color: rgba(255, 255, 255, 0);
+    transition: 0.3s all linear;} */
 
 .cursor{
     cursor: pointer;
